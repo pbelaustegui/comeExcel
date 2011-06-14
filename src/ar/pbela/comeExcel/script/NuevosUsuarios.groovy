@@ -8,7 +8,7 @@ def _dbDriver = "oracle.jdbc.driver.OracleDriver"
 def _dbUser = "expensys_admin"
 def _dbPass = "temp123"
 def _sql = Sql.newInstance(_dbUrl, _dbUser, _dbPass, _dbDriver)
-def _excelPath = "C:\\java\\proyectos\\expensys\\elHoy\\Creacion_Usuarios_20-05-2011.xls"
+def _excelPath = "C:\\java\\proyectos\\expensys\\elHoy\\caso11173236\\nuevosUsuarios.xls"
 
 
 //atenti al piojo que las columnas del excel tienen que tener los nombres que aparecen subrayados
@@ -25,7 +25,7 @@ new ExcelBuilder(_excelPath).eachLine([labels:true]) {
 		def _goaPromocional = 0
 		def _codigoCentroCosto = "replace($cc, ' ', '')"
 		def _idCentroCosto = "(select id_centro_costo from cnf_centro_costo" +
-			" where codigo_centro_costo = ${_codigoCentroCosto} and id_pais = ${_idPais})"
+			" where codigo_centro_costo = ${_codigoCentroCosto} and id_pais = ${_idPais} and activo = 1)"
 		def _isidAprobador = "replace(lower('$aprobador'), ' ', '')"
 		def _idAprobador = "(select id_usuario from usr_usuario where isid = ${_isidAprobador})"
 		def _firmaElectronica = 1
@@ -34,7 +34,7 @@ new ExcelBuilder(_excelPath).eachLine([labels:true]) {
 		def _activo = 1
 		def _esRetirado = 0
 		
-//		println "${_idCentroCosto}"
+//		println "${_isidAprobador + ' ' + _idAprobador}"
 		
 		
 		_sql.execute(
